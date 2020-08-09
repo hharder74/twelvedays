@@ -11,13 +11,16 @@
 #' @import dplyr
 #' @import glue
 #' @import purrr
+#' @import english
 #'
 #' @export
 sing_day <- function(dataset, line, phrase_col){
-
   phrases <- dataset %>% pull({{phrase_col}})
-
-  #????
-
-
+  day <- ordinal(line)
+  beginning_of_song <- str_glue("On the {day} day of Christmas, my true love sent to me,")
+  song <- phrases[line:1]
+  whole_song <- str_c(c(beginning_of_song, song), sep = ",", collapse = " ")
+  return(whole_song)
 }
+
+
